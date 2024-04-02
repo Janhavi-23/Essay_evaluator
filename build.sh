@@ -8,7 +8,7 @@ python3.9 -m ensurepip --upgrade
 cat /etc/*-release
 echo "Installing project dependencies..."
 pip3.9 install -r requirements.txt
-# apt-get install libsqlite3-dev
+dnf install libsqlite3-dev
 # pip3.9 install sqlite3
 # Make migrations
 echo "Making migrations..."
