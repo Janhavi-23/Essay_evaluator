@@ -3,12 +3,11 @@
 # Update pip
 echo "Updating pip..."
 # python3.9 install -U pip
-python3.9 -m pip install
 
 # Install dependencies
 
 echo "Installing project dependencies..."
-python3.9 -m pip install -r requirements.txt
+pip3.9 install -r requirements.txt
 
 # Make migrations
 echo "Making migrations..."
