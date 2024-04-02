@@ -2,7 +2,8 @@
 
 # Update pip
 echo "Updating pip..."
-python3.9 pip install -U pip
+# python3.9 install -U pip
+python3.9 -m pip install
 
 # Install dependencies
 
