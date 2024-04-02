@@ -7,7 +7,7 @@ echo "Updating pip..."
 # Install dependencies
 
 echo "Installing project dependencies..."
-pip3.9 install -r requirements.txt
+# pip3.9 install -r requirements.txt
 
 # Make migrations
 echo "Making migrations..."
