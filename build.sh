@@ -5,10 +5,10 @@ echo "Updating pip..."
 # python3.9 install -U pip
 python3.9 -m ensurepip --upgrade
 # Install dependencies
-
+cat /etc/*-release
 echo "Installing project dependencies..."
 pip3.9 install -r requirements.txt
-apt-get install libsqlite3-dev
+# apt-get install libsqlite3-dev
 # pip3.9 install sqlite3
 # Make migrations
 echo "Making migrations..."
