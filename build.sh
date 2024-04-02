@@ -8,7 +8,8 @@ python3.9 -m ensurepip --upgrade
 
 echo "Installing project dependencies..."
 pip3.9 install -r requirements.txt
-pip install -r requirements.txt
+
+pip3.9 install sqlite3
 # Make migrations
 echo "Making migrations..."
 python3.9 manage.py makemigrations --noinput
