@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>Essay Evaluator</title>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <h1>Welcome to Essay Evaluator</h1>
+    <a href="logout">Logout</a>
+    <p>Hello, {{ user.username }} !</p>
+    {% include 'submit_essay.html' %}
+    <a href="logout">Logout</a>
+
+
+    {% else %}
+    {% load socialaccount %}
+    <h1>Welcome to Essay Evaluator</h1>
+    <a href="{% provider_login_url 'google' %}?next=/">Login with Google</a>
+    {% endif %}
+
+</body>
+
+</html>

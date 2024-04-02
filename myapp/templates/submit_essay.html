@@ -1,0 +1,66 @@
+<div class="col-md-6 mb-4">
+    <div class="card" style="height:100%; border-radius:25px">
+        <div class="card-body">
+            <p class="card-text">Please submit your essay below for evaluation:</p>
+            <form id="essayForm" method="post" action="{% url 'submit_essay' %}">
+                {% csrf_token %}
+                <label for="title">Title:</label>
+                <br>
+                <input type="text" id="title" name="title" required>
+                <br>
+                <label for="essay">Essay:</label>
+                <br>
+                <textarea id="essay" name="essay" rows="10" cols="50" required></textarea>
+                <br>
+                <span id="wordCount" class="word-count">Word count: 0</span>
+                <br>
+                <span id="wordLimit" class="error-message" style="display: none;">Maximum word limit (500 words) reached!</span>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+            <br>
+            <div id="response" style="overflow: auto"></div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var essayTextarea = document.getElementById("essay");
+                    var wordCountSpan = document.getElementById("wordCount");
+                    var wordLimitMessage = document.getElementById("wordLimit");
+                    
+                    essayTextarea.addEventListener("input", function() {
+                        var wordCount = essayTextarea.value.trim().split(/\s+/).length;
+                        wordCountSpan.textContent = "Word count: " + wordCount;
+                        if (wordCount > 500) {
+                            wordLimitMessage.style.display = "inline";
+                        } else {
+                            wordLimitMessage.style.display = "none";
+                        }
+                    });
+                });
+                document.addEventListener("DOMContentLoaded", function() {
+        var essayForm = document.getElementById("essayForm");
+        var responseDiv = document.getElementById("response");
+
+        essayForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var formData = new FormData(essayForm);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", essayForm.action);
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        responseDiv.innerHTML = "<p>" + response.message + "</p>";
+                    } else {
+                        responseDiv.innerHTML = "<p>Error: " + xhr.statusText + "</p>";
+                    }
+                }
+            };
+            xhr.send(formData);
+        });
+    });
+            </script>
+        </div>
+    </div>
+</div>
